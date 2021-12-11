@@ -1,7 +1,8 @@
-package miapd.ahpv2.gui;
+package miapd.ahp.gui;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 
@@ -30,7 +31,11 @@ public class CategoryEvaluation extends GridPane {
     }
 
     public int getSelectedId(){
-        return (int)group.getSelectedToggle().getUserData();
+         Toggle selected = group.getSelectedToggle();
+         if (selected != null){
+             return (int) selected.getUserData();
+         }
+         return -1;
     }
 
 }

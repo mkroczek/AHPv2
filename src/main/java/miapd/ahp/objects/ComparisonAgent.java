@@ -1,16 +1,16 @@
-package miapd.ahpv2;
+package miapd.ahp.objects;
+
+import miapd.ahp.ahp.AHPRates;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ComparisonAgent {
-    private ArrayList<ComparisonObject> categories;
-    private ArrayList<ComparisonObject> comparisonObjects;
+    private ArrayList<ComparisonObject> categories = new ArrayList<>();
+    private ArrayList<ComparisonObject> comparisonObjects = new ArrayList<>();
     private Map<String, ComparisonMatrix> objectsComparison = new HashMap<>();
-    private ArrayList<ComparisonPair> pairsComparison;
-
+    private ArrayList<ComparisonPair> pairsComparison = new ArrayList<>();
 
     public ComparisonAgent(ArrayList<ComparisonObject> categories, ArrayList<ComparisonObject> comparisonObjects){
         ArrayList<String> objectsComparisonCategories = new ArrayList<>();
@@ -35,22 +35,25 @@ public class ComparisonAgent {
         }
     }
 
-    public void updateRating(String category, int pairID, double rating){
+    public void updateRating(String category, ComparisonPair pair, int rateId){
         //takes indices from current pair (id1, id2) and sets matrix[id1, id2] = rating for the given category
-        ComparisonPair pair = pairsComparison.get(pairID);
+        double rating = AHPRates.getRate(rateId);
         int x = pair.getX();
         int y = pair.getY();
         ComparisonMatrix tmpMatrix = objectsComparison.get(category);
         tmpMatrix.setRating(x, y, rating);
-        tmpMatrix.setRating(y, x, 1/rating);
+        tmpMatrix.setRating(y, x, AHPRates.getOppositeRate(rateId));
     }
 
-    public double getRating(String category, int pairID){
-        ComparisonPair pair = pairsComparison.get(pairID);
+    public double getRating(String category, ComparisonPair pair){
         int x = pair.getX();
         int y = pair.getY();
         ComparisonMatrix tmpMatrix = objectsComparison.get(category);
         return tmpMatrix.getRating(x, y);
+    }
+
+    public ArrayList<ComparisonPair> getPairs(){
+        return pairsComparison;
     }
 
     public double[] calculateSingleEVRanking(){

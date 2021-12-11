@@ -1,4 +1,4 @@
-package miapd.ahpv2.controllers;
+package miapd.ahp.controllers;
 
 public interface IModelController<T> {
     void setModel(T app);

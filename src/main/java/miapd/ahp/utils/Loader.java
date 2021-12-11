@@ -1,15 +1,14 @@
-package miapd.ahpv2;
+package miapd.ahp.utils;
 
+import miapd.ahp.objects.ComparisonObject;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 public class Loader {
     private final JSONParser parser = new JSONParser();
@@ -20,10 +19,10 @@ public class Loader {
             String localDir = System.getProperty("user.dir");
             Object obj;
             if(System.getProperty("file.separator").equals("/")){
-                obj = parser.parse(new FileReader(localDir + "/src/main/java/miapd/ahpv2/objects.json"));
+                obj = parser.parse(new FileReader(localDir + "/src/main/java/miapd/ahp/objects.json"));
             }
             else {
-                obj = parser.parse(new FileReader(localDir + "\\src\\main\\java\\miapd\\ahpv2\\objects.json"));
+                obj = parser.parse(new FileReader(localDir + "\\src\\main\\java\\miapd\\ahp\\objects.json"));
             }
             jsonObject = (JSONObject) obj;
         } catch (ParseException | IOException parseException) {

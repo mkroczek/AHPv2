@@ -1,4 +1,4 @@
-package miapd.ahpv2.controllers;
+package miapd.ahp.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

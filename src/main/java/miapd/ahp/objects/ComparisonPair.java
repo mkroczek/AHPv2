@@ -1,4 +1,4 @@
-package miapd.ahpv2;
+package miapd.ahp.objects;
 
 import java.util.ArrayList;
 
@@ -33,7 +33,7 @@ public class ComparisonPair {
         return this.secondObject;
     }
 
-    public ArrayList<String> getMatrices(){
+    public ArrayList<String> getCategories(){
         return this.matrices;
     }
 }

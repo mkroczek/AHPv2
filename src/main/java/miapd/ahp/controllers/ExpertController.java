@@ -1,12 +1,14 @@
-package miapd.ahpv2.controllers;
+package miapd.ahp.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import miapd.ahpv2.AHPApp;
-import miapd.ahpv2.ComparisonAgent;
-import miapd.ahpv2.ComparisonPair;
-import miapd.ahpv2.gui.CategoriesWindow;
+import miapd.ahp.AHPApp;
+import miapd.ahp.ahp.AHPRates;
+import miapd.ahp.objects.ComparisonAgent;
+import miapd.ahp.objects.ComparisonPair;
+import miapd.ahp.gui.CategoriesWindow;
+import miapd.ahp.gui.ObjectDescription;
 
 public class ExpertController implements IModelController<AHPApp>{
     @FXML
@@ -15,12 +17,20 @@ public class ExpertController implements IModelController<AHPApp>{
     @FXML
     CategoriesWindow compareWindow;
 
+    @FXML
+    ObjectDescription firstObjectDescription;
+
+    @FXML
+    ObjectDescription secondObjectDescription;
+
     private AHPApp app;
     private ComparisonAgent agent;
 
     public void setModel(AHPApp app){
         this.app = app;
         agent = app.getCurrentAgent();
+        pairsList.getItems().addAll(agent.getPairs());
+        pairsList.getSelectionModel().select(0);
     }
 
     @FXML
@@ -43,19 +53,29 @@ public class ExpertController implements IModelController<AHPApp>{
                 .addListener(((observable, oldValue, newValue) -> {
                     if(newValue != null) comparePair(newValue);
                 }));
+
+    }
+
+    public void saveComparison(){
+        ComparisonPair pair = pairsList.getSelectionModel().getSelectedItem();
+        if (pair != null){
+            compareWindow.saveResults(agent, pair);
+        }
+    }
+
+    public void proceed(){
+
     }
 
     private void comparePair(ComparisonPair pair){
-        app.
+        compareWindow.reset(); //clear categories and ratings from previous pair
+        compareWindow.addAll(pair.getCategories());
+        for (String category : pair.getCategories()){
+            double rating = agent.getRating(category, pair);
+            if (rating != 0){
+                compareWindow.fill(category, AHPRates.getId(rating));
+            }
+        }
     }
-
-    public void fillObjects(){
-    }
-
-    public void fillCategories(){
-
-    }
-
-
 
 }

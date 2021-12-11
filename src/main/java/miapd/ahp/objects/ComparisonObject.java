@@ -1,9 +1,7 @@
-package miapd.ahpv2;
+package miapd.ahp.objects;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class ComparisonObject {
     private String type;

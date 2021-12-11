@@ -1,4 +1,4 @@
-package miapd.ahpv2;
+package miapd.ahp.objects;
 
 import Jama.Matrix;
 import Jama.EigenvalueDecomposition;

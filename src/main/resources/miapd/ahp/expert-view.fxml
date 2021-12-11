@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import miapd.ahp.gui.ObjectDescription?>
+<?import miapd.ahp.gui.CategoriesWindow?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="miapd.ahp.controllers.ExpertController"
+          prefHeight="400.0" prefWidth="600.0">
+    <ListView GridPane.columnIndex="0" GridPane.rowIndex="0" fx:id="pairsList">
+
+    </ListView>
+    <GridPane GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <ObjectDescription GridPane.columnIndex="0" GridPane.rowIndex="0" fx:id="firstObjectDescription"/>
+
+        <CategoriesWindow GridPane.columnIndex="1" GridPane.rowIndex="0" fx:id="compareWindow"/>
+
+        <ObjectDescription GridPane.columnIndex="2" GridPane.rowIndex="0" fx:id="secondObjectDescription"/>
+
+        <Button GridPane.columnIndex="1" GridPane.rowIndex="1" onAction="#saveComparison"/>
+    </GridPane>
+    <Button GridPane.columnIndex="1" GridPane.rowIndex="1" onAction="#proceed"/>
+</GridPane>
