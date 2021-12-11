@@ -1,0 +1,71 @@
+{
+  "dishes": [
+    {
+      "name": "Pizza",
+      "price": "21.50",
+      "parameter": "30 cm",
+      "description": "Pizza Margarita pyszna"
+    },
+
+    {
+      "name": "Sushi",
+      "price": "42.00",
+      "parameter": "10 rolek",
+      "description": "Sushi bardzo dobre azjatyckie"
+    },
+
+    {
+      "name": "Pierogi",
+      "price": "11.00",
+      "parameter": "8 pierogów",
+      "description": "Pyszne pierogi ruskie"
+    },
+
+    {
+      "name": "Spaghetti",
+      "price": "18.00",
+      "parameter": "250 g",
+      "description": "dobre spaghetti z sosem pomidorowym"
+    },
+
+    {
+      "name": "Pomidorowa",
+      "price": "8.00",
+      "parameter": "350 ml",
+      "description": "Super pomidorowa z rosolu z wczoraj"
+    },
+
+    {
+      "name": "Zapiekanka",
+      "price": "8.00",
+      "parameter": "200 g",
+      "description": "Prawie jak z ikei"
+    },
+
+    {
+      "name": "Lody truskawkowe",
+      "price": "5.00",
+      "parameter": "100 g",
+      "description": "zimne ponizej 0C, z polewa tez truskawkowa"
+    },
+
+    {
+      "name": "Szarlotka",
+      "price": "7.00",
+      "parameter": "80 g",
+      "description": "z jabłek z pieknych polskich sadow"
+    }
+  ],
+
+  "categories": [
+    {
+      "name": "Cena"
+    },
+    {
+      "name": "Wielkosc"
+    },
+    {
+      "name": "Czas oczekiwania"
+    }
+  ]
+}

@@ -46,6 +46,14 @@ public class ComparisonMatrix {
         }
     }
 
+    public double getRating(int x, int y) {
+        return this.comparisonMatrix[x][y];
+    }
+
+    public void setRating(int x, int y, double rating) {
+        this.comparisonMatrix[x][y] = rating;
+    }
+
     private double[][] getAuxiliaryMatrixEV(){
         double[][] auxiliaryMatrix = new double[this.size][this.size];
         for(int i=0; i<this.size; i++){
