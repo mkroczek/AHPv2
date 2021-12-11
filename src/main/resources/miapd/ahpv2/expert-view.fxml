@@ -6,15 +6,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="miapd.ahpv2.controllers.ExpertController"
-            prefHeight="400.0" prefWidth="600.0">
-    <ScrollPane fx:id = "pairsPane">
+<?import miapd.ahpv2.gui.CategoriesWindow?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="miapd.ahpv2.controllers.ExpertController"
+          prefHeight="400.0" prefWidth="600.0">
+    <ListView GridPane.columnIndex="0" GridPane.rowIndex="0" fx:id="pairsList">
 
-    </ScrollPane>
+    </ListView>
+    <CategoriesWindow fx:id="compareWindow">
 
-    <ScrollPane fx:id = "categoriesPane">
-
-    </ScrollPane>
-</VBox>
+    </CategoriesWindow>
+</GridPane>
