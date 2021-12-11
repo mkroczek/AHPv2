@@ -1,4 +1,4 @@
-package com.example.ahpv2;
+package miapd.ahpv2;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

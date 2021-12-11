@@ -1,4 +1,4 @@
-package com.example.ahpv2;
+package miapd.ahpv2;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

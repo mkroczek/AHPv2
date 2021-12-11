@@ -1,8 +1,9 @@
-module com.example.ahpv2 {
+module miapd.ahpv2 {
     requires javafx.controls;
     requires javafx.fxml;
+    requires jama;
 
 
-    opens com.example.ahpv2 to javafx.fxml;
-    exports com.example.ahpv2;
+    opens miapd.ahpv2 to javafx.fxml;
+    exports miapd.ahpv2;
 }
