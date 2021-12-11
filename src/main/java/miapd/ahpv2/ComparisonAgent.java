@@ -22,7 +22,7 @@ public class ComparisonAgent {
 
         for(int i=0; i<comparisonObjects.size(); i++){
             for(int j=i+1; j<comparisonObjects.size(); j++){
-                pairsComparison.add(new ComparisonPair(i, j, objectsComparisonCategories));
+                pairsComparison.add(new ComparisonPair(i, j, comparisonObjects.get(i), comparisonObjects.get(j), objectsComparisonCategories));
             }
         }
 
@@ -30,7 +30,7 @@ public class ComparisonAgent {
         categoriesComparisonCategories.add("categories");
         for(int i=0; i<categories.size(); i++){
             for(int j=i+1; j<categories.size(); j++){
-                pairsComparison.add(new ComparisonPair(i, j, categoriesComparisonCategories));
+                pairsComparison.add(new ComparisonPair(i, j, categories.get(i), categories.get(j),categoriesComparisonCategories));
             }
         }
     }
@@ -52,6 +52,51 @@ public class ComparisonAgent {
         ComparisonMatrix tmpMatrix = objectsComparison.get(category);
         return tmpMatrix.getRating(x, y);
     }
+
+    public double[] calculateSingleEVRanking(){
+        int vectorSize = this.comparisonObjects.size();
+        double[] singleEVRanking = new double[vectorSize];
+
+        for (int i=0; i<vectorSize; i++){
+            singleEVRanking[i] = 0;
+        }
+
+        double[] categoriesRanking = objectsComparison.get("categories").calculateEV();
+        int categoryCounter = 0;
+        for (ComparisonObject category:categories){
+            String currentCategory = category.getProperty("name");
+            double[] tmpVector = objectsComparison.get(currentCategory).calculateEV();
+            for (int i=0; i<vectorSize; i++){
+                singleEVRanking[i] = singleEVRanking[i] + tmpVector[i]*categoriesRanking[categoryCounter];
+            }
+            categoryCounter = categoryCounter + 1;
+        }
+
+        return singleEVRanking;
+    }
+
+    public double[] calculateSingleGMRanking(){
+        int vectorSize = this.comparisonObjects.size();
+        double[] singleGMRanking = new double[vectorSize];
+
+        for (int i=0; i<vectorSize; i++){
+            singleGMRanking[i] = 0;
+        }
+
+        double[] categoriesRanking = objectsComparison.get("categories").calculateGM();
+        int categoryCounter = 0;
+        for (ComparisonObject category:categories){
+            String currentCategory = category.getProperty("name");
+            double[] tmpVector = objectsComparison.get(currentCategory).calculateGM();
+            for (int i=0; i<vectorSize; i++){
+                singleGMRanking[i] = singleGMRanking[i] + tmpVector[i]*categoriesRanking[categoryCounter];
+            }
+            categoryCounter = categoryCounter + 1;
+        }
+
+        return singleGMRanking;
+    }
+
 
 
 }
