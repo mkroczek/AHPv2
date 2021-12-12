@@ -1,6 +1,7 @@
 package miapd.ahp.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import miapd.ahp.AHPApp;
@@ -23,12 +24,16 @@ public class ExpertController implements IModelController<AHPApp>{
     @FXML
     ObjectDescription secondObjectDescription;
 
+    @FXML
+    Label sceneTitle;
+
     private AHPApp app;
     private ComparisonAgent agent;
 
     public void setModel(AHPApp app){
         this.app = app;
         agent = app.getCurrentAgent();
+        sceneTitle.setText("Agent "+app.getCurrentAgentId());
         pairsList.getItems().addAll(agent.getPairs());
         pairsList.getSelectionModel().select(0);
     }
@@ -64,12 +69,14 @@ public class ExpertController implements IModelController<AHPApp>{
     }
 
     public void proceed(){
-
+        app.comparisonEnd();
     }
 
     private void comparePair(ComparisonPair pair){
         compareWindow.reset(); //clear categories and ratings from previous pair
         compareWindow.addAll(pair.getCategories());
+        firstObjectDescription.fill(pair.getFirstObject());
+        secondObjectDescription.fill(pair.getSecondObject());
         for (String category : pair.getCategories()){
             double rating = agent.getRating(category, pair);
             if (rating != 0){
