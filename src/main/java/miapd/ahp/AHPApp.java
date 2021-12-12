@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import miapd.ahp.ahp.CalculationOption;
 import miapd.ahp.ahp.CalculationOptions;
 import miapd.ahp.controllers.IModelController;
 import miapd.ahp.objects.ComparisonAgent;
@@ -90,6 +89,18 @@ public class AHPApp extends Application {
         stage.show();
     }
 
+    public ArrayList<String> getRankingResults(){
+        ArrayList<String> result = new ArrayList<>();
+        //add sesstion settings
+        String options = "Options:\n";
+        for (String option : sessionOptions.getOptionsSet()){
+            options += option+" "+sessionOptions.getChosen(option)+"\n";
+        }
+        result.add(options);
+        //add rest of results
+        return result;
+    }
+
     public int getCurrentAgentId(){
         return currentAgentId;
     }
@@ -99,7 +110,9 @@ public class AHPApp extends Application {
     }
 
     public void optionsChosen(){
-        System.out.println("All options has been collected");
+        //calculate results
+        addScene("result", "result-view.fxml");
+        switchScene("result");
     }
 
     public void nextAgent(){

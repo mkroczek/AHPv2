@@ -1,12 +1,10 @@
 package miapd.ahp.gui;
 
 import javafx.scene.layout.GridPane;
-import miapd.ahp.ahp.CalculationOption;
 import miapd.ahp.ahp.CalculationOptions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class OptionsWindow extends GridPane {
     private HashMap<String, OptionEvaluation> optionsWidgets = new HashMap<>();
