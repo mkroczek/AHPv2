@@ -8,8 +8,11 @@ import javafx.stage.Stage;
 import miapd.ahp.ahp.CalculationOptions;
 import miapd.ahp.controllers.IModelController;
 import miapd.ahp.objects.ComparisonAgent;
+import miapd.ahp.objects.ComparisonMatrix;
 import miapd.ahp.objects.ComparisonObject;
+import miapd.ahp.objects.ComparisonPair;
 import miapd.ahp.utils.Loader;
+import java.math.*;
 
 import java.io.IOException;
 import java.util.*;
@@ -125,6 +128,45 @@ public class AHPApp extends Application {
 
     public void comparisonEnd(){
         switchScene("moreAgents");
+    }
+
+
+    public double[] calculateRankingEV(){
+        int categoriesSize = categoriesToCompare.size();
+        double[] aggregatedResults = new double[categoriesSize];
+
+        for(ComparisonAgent agent: agents){
+            for(int i = 0; i<categoriesSize; i++){
+                aggregatedResults[i] = aggregatedResults[i] + agent.calculateSingleEVRanking()[i];
+            }
+        }
+
+        for(int i = 0; i<categoriesSize; i++){
+            aggregatedResults[i] = aggregatedResults[i]/ agents.size();
+        }
+
+        return aggregatedResults;
+    }
+
+    public double[] calculateRankingGM(){
+        int categoriesSize = categoriesToCompare.size();
+        double[] aggregatedResults = new double[categoriesSize];
+
+        for(int i = 0; i<categoriesSize; i++){
+            aggregatedResults[i] = 1;
+        }
+
+        for(ComparisonAgent agent: agents){
+            for(int i = 0; i<categoriesSize; i++){
+                aggregatedResults[i] = aggregatedResults[i] + agent.calculateSingleGMRanking()[i];
+            }
+        }
+
+        for(int i = 0; i<categoriesSize; i++){
+            aggregatedResults[i] = Math.pow(aggregatedResults[i], 1.0/agents.size());
+        }
+
+        return aggregatedResults;
     }
 
     public static void main(String[] args) {
