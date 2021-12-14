@@ -100,6 +100,8 @@ public class ComparisonAgent {
         return singleGMRanking;
     }
 
-
+    public ComparisonMatrix getMatrix(String name){
+        return this.objectsComparison.get(name);
+    }
 
 }

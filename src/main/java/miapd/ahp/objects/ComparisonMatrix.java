@@ -46,6 +46,18 @@ public class ComparisonMatrix {
         }
     }
 
+    public double[][] getComparisonMatrix(){
+        return this.comparisonMatrix;
+    }
+
+    public int getSize(){
+        return this.size;
+    }
+
+    public double getValueFromIndex(int i, int j){
+        return this.comparisonMatrix[i][j];
+    }
+
     public double getRating(int x, int y) {
         return this.comparisonMatrix[x][y];
     }
@@ -166,6 +178,25 @@ public class ComparisonMatrix {
         }
 
         return vectorW;
+    }
+
+    public double calculateSaatysIC(){
+        Matrix matrix = new Matrix(this.getAuxiliaryMatrixEV());
+        EigenvalueDecomposition EVD = new EigenvalueDecomposition(matrix);
+
+        double[] eigenvaluesR = EVD.getRealEigenvalues();
+        double[] eigenvaluesI = EVD.getImagEigenvalues();
+
+        double max = -1.0;
+        int maxIndex = 0;
+        for(int i=0; i<eigenvaluesR.length; i++){
+            if (eigenvaluesR[i] > max && eigenvaluesI[i] == 0.0){
+                max = eigenvaluesR[i];
+                maxIndex = i;
+            }
+        }
+
+        return (max - this.size)/(this.size - 1);
     }
 
 
