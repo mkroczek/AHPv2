@@ -3,6 +3,7 @@ package miapd.ahp.objects;
 import miapd.ahp.ahp.AHPRates;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +14,9 @@ public class ComparisonAgent {
     private ArrayList<ComparisonPair> pairsComparison = new ArrayList<>();
 
     public ComparisonAgent(ArrayList<ComparisonObject> categories, ArrayList<ComparisonObject> comparisonObjects){
+        this.categories = categories;
+        this.comparisonObjects = comparisonObjects;
+
         ArrayList<String> objectsComparisonCategories = new ArrayList<>();
         for (ComparisonObject category: categories){
             objectsComparisonCategories.add(category.getProperty("name"));
@@ -59,6 +63,7 @@ public class ComparisonAgent {
     public double[] calculateSingleEVRanking(){
         int vectorSize = this.comparisonObjects.size();
         double[] singleEVRanking = new double[vectorSize];
+        System.out.println("comparisonObjects.size = "+comparisonObjects.size());
 
         for (int i=0; i<vectorSize; i++){
             singleEVRanking[i] = 0;
@@ -74,7 +79,7 @@ public class ComparisonAgent {
             }
             categoryCounter = categoryCounter + 1;
         }
-
+        System.out.println("Calculated ranking in agent = "+ Arrays.toString(singleEVRanking));
         return singleEVRanking;
     }
 

@@ -88,13 +88,19 @@ public class AHPApp extends Application {
 
     public ArrayList<String> getRankingResults(){
         ArrayList<String> result = new ArrayList<>();
-        //add sesstion settings
+        //add session settings
         String options = "Options:\n";
         for (String option : sessionOptions.getOptionsSet()){
             options += option+" "+sessionOptions.getChosen(option)+"\n";
         }
         result.add(options);
         //add rest of results
+        String ranking = "Ranking\n";
+        double[] res = calculateRankingEV();
+        for (int i = 0; i < res.length; i++){
+            ranking += objectsToCompare.get(i).getProperty("name")+" "+res[i]+"\n";
+        }
+        result.add(ranking);
         return result;
     }
 
@@ -117,6 +123,7 @@ public class AHPApp extends Application {
 
     public void optionsChosen(){
         //calculate results here
+
         addScene("result", "result-view.fxml");
         switchScene("result");
     }
@@ -132,16 +139,18 @@ public class AHPApp extends Application {
 
 
     public double[] calculateRankingEV(){
-        int categoriesSize = categoriesToCompare.size();
-        double[] aggregatedResults = new double[categoriesSize];
+        int objectsToCompSize = objectsToCompare.size();
+        System.out.println("Categories to compare size = "+objectsToCompSize);
+        System.out.println("Agents size = "+agents.size());
+        double[] aggregatedResults = new double[objectsToCompare.size()];
 
         for(ComparisonAgent agent: agents){
-            for(int i = 0; i<categoriesSize; i++){
+            for(int i = 0; i<objectsToCompSize; i++){
                 aggregatedResults[i] = aggregatedResults[i] + agent.calculateSingleEVRanking()[i];
             }
         }
 
-        for(int i = 0; i<categoriesSize; i++){
+        for(int i = 0; i<objectsToCompSize; i++){
             aggregatedResults[i] = aggregatedResults[i]/ agents.size();
         }
 
@@ -149,20 +158,20 @@ public class AHPApp extends Application {
     }
 
     public double[] calculateRankingGM(){
-        int categoriesSize = categoriesToCompare.size();
-        double[] aggregatedResults = new double[categoriesSize];
+        int objectsToCompSize = objectsToCompare.size();
+        double[] aggregatedResults = new double[objectsToCompSize];
 
-        for(int i = 0; i<categoriesSize; i++){
+        for(int i = 0; i<objectsToCompSize; i++){
             aggregatedResults[i] = 1;
         }
 
         for(ComparisonAgent agent: agents){
-            for(int i = 0; i<categoriesSize; i++){
+            for(int i = 0; i<objectsToCompSize; i++){
                 aggregatedResults[i] = aggregatedResults[i] + agent.calculateSingleGMRanking()[i];
             }
         }
 
-        for(int i = 0; i<categoriesSize; i++){
+        for(int i = 0; i<objectsToCompSize; i++){
             aggregatedResults[i] = Math.pow(aggregatedResults[i], 1.0/agents.size());
         }
 
