@@ -66,6 +66,17 @@ public class ComparisonMatrix {
         this.comparisonMatrix[x][y] = rating;
     }
 
+    private boolean checkIfComplete(){
+        for(int i=0; i<this.size; i++){
+            for(int j=0; j<this.size; j++){
+                if(comparisonMatrix[i][j] == 0){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     private double[][] getAuxiliaryMatrixEV(){
         double[][] auxiliaryMatrix = new double[this.size][this.size];
         for(int i=0; i<this.size; i++){
@@ -80,15 +91,37 @@ public class ComparisonMatrix {
                     }
                 }
             }
-            comparisonMatrix[i][i] = zerosCounter + 1;
+            System.out.println(zerosCounter);
+            auxiliaryMatrix[i][i] = zerosCounter + 1;
         }
 
         return auxiliaryMatrix;
     }
 
     public double[] calculateEV(){
-        Matrix matrix = new Matrix(this.getAuxiliaryMatrixEV());
+        Matrix matrix;
+        if (checkIfComplete()){
+            matrix = new Matrix(this.comparisonMatrix);
+        }
+        else {
+            matrix = new Matrix(this.getAuxiliaryMatrixEV());
+        }
         EigenvalueDecomposition EVD = new EigenvalueDecomposition(matrix);
+
+        for(int i=0; i<this.size; i++){
+            for(int j=0; j<this.size; j++){
+                System.out.print(comparisonMatrix[i][j] + " ");
+            }
+            System.out.print("\n");
+        }
+
+        double[][] au = this.getAuxiliaryMatrixEV();
+        for(int i=0; i<this.size; i++){
+            for(int j=0; j<this.size; j++){
+                System.out.print(au[i][j] + " ");
+            }
+            System.out.print("\n");
+        }
 
         double[] eigenvaluesR = EVD.getRealEigenvalues();
         double[] eigenvaluesI = EVD.getImagEigenvalues();
@@ -159,7 +192,14 @@ public class ComparisonMatrix {
     }
 
     public double[] calculateGM(){
-        Matrix matrixB = new Matrix(this.getAuxiliaryMatrixGM());
+        Matrix matrixB;
+        if (checkIfComplete()){
+            matrixB = new Matrix(this.comparisonMatrix);
+        }
+        else {
+            matrixB = new Matrix(this.getAuxiliaryMatrixGM());
+        }
+//        Matrix matrixB = new Matrix(this.getAuxiliaryMatrixGM());
         Matrix matrixLogC = new Matrix(this.getConstantsMatrixGM());
         Matrix matrixLogW = matrixB.solve(matrixLogC);
 
