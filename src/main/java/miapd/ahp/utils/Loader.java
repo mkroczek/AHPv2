@@ -19,10 +19,10 @@ public class Loader {
             String localDir = System.getProperty("user.dir");
             Object obj;
             if(System.getProperty("file.separator").equals("/")){
-                obj = parser.parse(new FileReader(localDir + "/src/main/java/miapd/ahp/objects.json"));
+                obj = parser.parse(new FileReader(localDir + "/src/main/java/miapd/ahp/projects.json"));
             }
             else {
-                obj = parser.parse(new FileReader(localDir + "\\src\\main\\java\\miapd\\ahp\\objects.json"));
+                obj = parser.parse(new FileReader(localDir + "\\src\\main\\java\\miapd\\ahp\\projects.json"));
             }
             jsonObject = (JSONObject) obj;
         } catch (ParseException | IOException parseException) {
@@ -36,11 +36,17 @@ public class Loader {
         Iterator<JSONObject> iterator = objectsJSON.iterator();
         JSONObject object;
         while (iterator.hasNext()) {
+            //iterate through each object
             object = iterator.next();
             ComparisonObject tmpObject = new ComparisonObject(objectType);
-            for (String property:properties){
-                tmpObject.addProperty(property, (String)object.get(property));
+            Iterator<String> propertyIterator = object.keySet().iterator();
+            while(propertyIterator.hasNext()){
+                String key = propertyIterator.next();
+                tmpObject.addProperty(key, (String)object.get(key));
             }
+//            for (String property:properties){
+//                tmpObject.addProperty(property, (String)object.get(property));
+//            }
             objectsList.add(tmpObject);
         }
         assert jsonObject != null;

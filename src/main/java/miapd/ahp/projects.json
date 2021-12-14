@@ -1,0 +1,43 @@
+{
+  "objects": [
+    {
+      "name": "BO.D1.1/21",
+      "title": "SADŹMY DRZEWA!",
+      "price": "390000",
+      "description": "Posadźmy drzewa na Staszica. To jedna z nielicznych ulic w okolicy, przy której nie ma żadnej zieleni. Dzięki nowej roślinności miejsce stanie się ładniejsze oraz milsze do życia i spacerów. Zmiany nie ograniczą miejsc do parkowania dla samochodów."
+    },
+
+    {
+      "name": "BO.D1.2/21",
+      "title": "Nowe chodniki na Kazimierzu i nie tylko...",
+      "price": "441900",
+      "description": "Remonty chodników: 1) chodników w ciągu ul. Meiselsa na odcinku od ul. Bożego Ciała w kierunku ul. Krakowskiej; 2) chodników przy ul. Skałecznej na odcinku od ul. Augustiańskiej do ul. Krakowskiej; 3) chodnika po prawej stronie ul. Paulińskiej na odcinku od ul. Augustiańskiej w kierunku ul. Orzeszkowej"
+    },
+
+    {
+      "name": "BO.D1.5/21",
+      "title": "Sadzimy drzewa i krzewy w I Dzielnicy!",
+      "price": "350000",
+      "description": "Projekt zakłada nasadzenia na terenie I Dzielnicy dużych sadzonek drzew, a ewentualnie w przypadku konieczności krzewów i bylin, które w niedalekiej przyszłości utworzą nowe skwery, zieleńce. Docelowe lokalizacje nasadzeń zostaną skonsultowane z autorem projektu Budżetu Obywatelskiego."
+    },
+
+    {
+      "name": "BO.D1.11/21",
+      "title": "Zadbajmy o wzrok naszych dzieci",
+      "price": "12158",
+      "description": "Zajęcia treningu wzroku dla dzieci w wieku szkolnym i ich rodziców, prowadzone przez dyplomowanego instruktora. Zabawy, ćwiczenia, nauka poprawnej pracy ze wzrokiem, zminimalizowanie skutków nadmiernego używania ekranów, komputerów i smartphonów."
+    }
+  ],
+
+  "categories": [
+    {
+      "name": "Cena"
+    },
+    {
+      "name": "Użyteczność publiczna"
+    },
+    {
+      "name": "Czas wykonania"
+    }
+  ]
+}

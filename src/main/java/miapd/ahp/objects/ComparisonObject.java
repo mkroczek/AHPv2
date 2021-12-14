@@ -2,6 +2,8 @@ package miapd.ahp.objects;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class ComparisonObject {
     private String type;
@@ -18,6 +20,10 @@ public class ComparisonObject {
 
     public String getProperty(String property){
         return this.properties.get(property);
+    }
+
+    public Set<Map.Entry<String, String>> getProperties(){
+        return properties.entrySet();
     }
 
     public void addProperty(String key, String value){

@@ -5,6 +5,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import miapd.ahp.objects.ComparisonObject;
 
+import java.util.Map;
+
 public class ObjectDescription extends GridPane {
     private Label title = new Label();
     private TextArea description = new TextArea();
@@ -25,5 +27,11 @@ public class ObjectDescription extends GridPane {
 //            }
 //            add(description, 0, 1);
 //        }
+        for (Map.Entry<String, String> entry : object.getProperties()) {
+            String name = entry.getKey();
+            String value = entry.getValue();
+            description.appendText(name+"\n"+value+"\n\n");
+        }
+        add(description, 0, 1);
     }
 }

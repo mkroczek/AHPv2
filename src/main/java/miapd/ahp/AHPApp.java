@@ -24,21 +24,14 @@ public class AHPApp extends Application {
     private Stage stage;
     private CalculationOptions<String> sessionOptions = new CalculationOptions<>();
 
-    public ComparisonAgent getCurrentAgent(){
-        return agents.get(currentAgentId);
-    }
-
-    public CalculationOptions<String> getSessionOptions(){
-        return sessionOptions;
-    }
-
     private IModelController<AHPApp> addScene(String name, String fxmlFile){
         FXMLLoader fxmlLoader = new FXMLLoader(AHPApp.class.getResource(fxmlFile));
         try {
             Pane root = fxmlLoader.load();
             IModelController<AHPApp> controller = fxmlLoader.getController();
             controller.setModel(this);
-            Scene scene = new Scene(root, 1280, 720);
+//            Scene scene = new Scene(root, 1280, 720);
+            Scene scene = new Scene(root);
             scenes.put(name, scene);
             return controller;
         } catch (IOException e) {
@@ -59,6 +52,7 @@ public class AHPApp extends Application {
     }
 
     private int addAgent(){
+        //each agent creates his own scene
         ComparisonAgent agent = new ComparisonAgent(categoriesToCompare, objectsToCompare);
         int agentId = agents.size();
         agents.add(agent);
@@ -105,12 +99,21 @@ public class AHPApp extends Application {
         return currentAgentId;
     }
 
+    public ComparisonAgent getCurrentAgent(){
+        return agents.get(currentAgentId);
+    }
+
+    public CalculationOptions<String> getSessionOptions(){
+        return sessionOptions;
+    }
+
+    //methods changing program state
     public void agentsEnd(){
         switchScene("options");
     }
 
     public void optionsChosen(){
-        //calculate results
+        //calculate results here
         addScene("result", "result-view.fxml");
         switchScene("result");
     }
