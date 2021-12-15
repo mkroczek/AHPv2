@@ -30,6 +30,6 @@ public class IncompleteTest {
 //        double[] result = agent.calculateSingleEVRanking();
 //        double[] res = agent.calculateSingleGMRanking();
 //        System.out.println("EVM res = "+Arrays.toString(result));
-        System.out.println("GMM res = "+Arrays.toString(res));
+//        System.out.println("GMM res = "+Arrays.toString(res));
     }
 }
