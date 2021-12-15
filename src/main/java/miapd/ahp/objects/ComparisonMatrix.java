@@ -179,30 +179,44 @@ public class ComparisonMatrix {
     }
 
     public double[] calculateGM(){
-        Matrix matrixB;
+        double[] vectorW = new double[this.size];
         if (checkIfComplete()){
-            matrixB = new Matrix(this.comparisonMatrix);
+            double[][] matrixB = this.comparisonMatrix;
+
+            double tmp;
+            double sum =0.0;
+            for (int i=0; i<this.size; i++){
+                tmp = 1.0;
+                for (int j=0; j<this.size; j++){
+                    tmp = tmp * matrixB[i][j];
+                }
+                vectorW[i] = Math.pow(tmp, 1.0/this.size);
+                sum = sum + vectorW[i];
+            }
+
+            for(int i=0; i<this.size; i++){
+                vectorW[i] = vectorW[i] / sum;
+            }
         }
         else {
-            matrixB = new Matrix(this.getAuxiliaryMatrixGM());
+            Matrix matrixB = new Matrix(this.getAuxiliaryMatrixGM());
+            Matrix matrixLogC = new Matrix(this.getConstantsMatrixGM());
+            Matrix matrixLogW = matrixB.solve(matrixLogC);
+
+            double[][] tmpLogW = matrixLogW.getArrayCopy();
+
+            double sum = 0.0;
+            for (int i=0; i<this.size; i++){
+                double value = Math.exp(tmpLogW[i][0]);
+                vectorW[i] = value;
+                sum = sum + value;
+            }
+
+            for (int i=0; i<this.size; i++){
+                vectorW[i] = vectorW[i]/sum;
+            }
         }
 //        Matrix matrixB = new Matrix(this.getAuxiliaryMatrixGM());
-        Matrix matrixLogC = new Matrix(this.getConstantsMatrixGM());
-        Matrix matrixLogW = matrixB.solve(matrixLogC);
-
-        double[][] tmpLogW = matrixLogW.getArrayCopy();
-        double[] vectorW = new double[this.size];
-
-        double sum = 0.0;
-        for (int i=0; i<this.size; i++){
-            double value = Math.exp(tmpLogW[i][0]);
-            vectorW[i] = value;
-            sum = sum + value;
-        }
-
-        for (int i=0; i<this.size; i++){
-            vectorW[i] = vectorW[i]/sum;
-        }
 
         return vectorW;
     }
