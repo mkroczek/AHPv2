@@ -2,10 +2,7 @@ package miapd.ahp.objects;
 
 import miapd.ahp.ahp.AHPRates;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ComparisonAgent {
     private ArrayList<ComparisonObject> categories = new ArrayList<>();
@@ -48,6 +45,17 @@ public class ComparisonAgent {
         tmpMatrix.setRating(x, y, rating);
         tmpMatrix.setRating(y, x, AHPRates.getOppositeRate(rateId));
     }
+
+    //uncomment for test
+
+//    public void updateRating(String category, ComparisonPair pair, double rate){
+//        //takes indices from current pair (id1, id2) and sets matrix[id1, id2] = rating for the given category
+//        int x = pair.getX();
+//        int y = pair.getY();
+//        ComparisonMatrix tmpMatrix = objectsComparison.get(category);
+//        tmpMatrix.setRating(x, y, rate);
+//        tmpMatrix.setRating(y, x, 1/rate);
+//    }
 
     public double getRating(String category, ComparisonPair pair){
         int x = pair.getX();
@@ -103,6 +111,11 @@ public class ComparisonAgent {
         }
 
         return singleGMRanking;
+    }
+
+    public Set<Map.Entry<String, ComparisonMatrix>> getResultsEntrySet(){
+        //returns entry of objectComparisons - which contains category and corresponding matrix
+        return objectsComparison.entrySet();
     }
 
     public ComparisonMatrix getMatrix(String name){

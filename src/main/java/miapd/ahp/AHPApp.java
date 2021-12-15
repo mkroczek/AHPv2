@@ -88,19 +88,32 @@ public class AHPApp extends Application {
 
     public ArrayList<String> getRankingResults(){
         ArrayList<String> result = new ArrayList<>();
+
         //add session settings
         String options = "Options:\n";
         for (String option : sessionOptions.getOptionsSet()){
             options += option+" "+sessionOptions.getChosen(option)+"\n";
         }
         result.add(options);
+
         //add rest of results
-        String ranking = "Ranking\n";
+        String ranking = "Ranking:\n";
         double[] res = calculateRankingEV();
         for (int i = 0; i < res.length; i++){
             ranking += objectsToCompare.get(i).getProperty("name")+" "+res[i]+"\n";
         }
         result.add(ranking);
+
+        //calculate inconsistency indices for each agent
+        String CI = "Consistency Indices:\n";
+        for (int i = 0; i < agents.size(); i++){
+            CI += "Agent "+i+": \n";
+            for (Map.Entry<String, ComparisonMatrix> comparisonResult : agents.get(i).getResultsEntrySet()){
+                CI += comparisonResult.getKey()+":\n";
+                CI += "\t- Saaty: "+comparisonResult.getValue().calculateSaatysIC()+"\n";
+            }
+        }
+        result.add(CI);
         return result;
     }
 

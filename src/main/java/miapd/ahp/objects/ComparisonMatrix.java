@@ -3,6 +3,7 @@ package miapd.ahp.objects;
 import Jama.Matrix;
 import Jama.EigenvalueDecomposition;
 import java.lang.*;
+import java.util.Arrays;
 
 public class ComparisonMatrix {
     private final double[][] comparisonMatrix;
@@ -91,7 +92,6 @@ public class ComparisonMatrix {
                     }
                 }
             }
-            System.out.println(zerosCounter);
             auxiliaryMatrix[i][i] = zerosCounter + 1;
         }
 
@@ -170,7 +170,6 @@ public class ComparisonMatrix {
             auxiliaryMatrix[i][i] = constantsCounter + 1;
         }
 
-
         return auxiliaryMatrix;
     }
 
@@ -187,7 +186,7 @@ public class ComparisonMatrix {
                 }
             }
         }
-
+        System.out.println("r = "+Arrays.deepToString(constantsVector));
         return constantsVector;
     }
 

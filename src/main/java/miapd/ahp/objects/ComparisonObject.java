@@ -10,8 +10,8 @@ public class ComparisonObject {
     private HashMap<String, String> properties = new LinkedHashMap<>();
 
 
-    public ComparisonObject(String name) {
-        this.type = name;
+    public ComparisonObject(String type) {
+        this.type = type;
     }
 
     public String getType(){
