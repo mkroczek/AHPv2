@@ -1,6 +1,7 @@
 package miapd.ahp.objects;
 
 import miapd.ahp.ahp.AHPRates;
+import miapd.ahp.utils.SingularValueError;
 
 import java.util.*;
 
@@ -89,7 +90,7 @@ public class ComparisonAgent {
         return singleEVRanking;
     }
 
-    public double[] calculateSingleGMRanking(){
+    public double[] calculateSingleGMRanking() throws SingularValueError {
         int vectorSize = this.comparisonObjects.size();
         double[] singleGMRanking = new double[vectorSize];
 

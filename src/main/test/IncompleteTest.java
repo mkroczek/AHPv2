@@ -28,7 +28,7 @@ public class IncompleteTest {
 //        agent.updateRating("category0", pairs.get(9), 9.0);
 
 //        double[] result = agent.calculateSingleEVRanking();
-        double[] res = agent.calculateSingleGMRanking();
+//        double[] res = agent.calculateSingleGMRanking();
 //        System.out.println("EVM res = "+Arrays.toString(result));
         System.out.println("GMM res = "+Arrays.toString(res));
     }

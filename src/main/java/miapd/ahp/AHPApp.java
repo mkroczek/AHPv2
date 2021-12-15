@@ -12,6 +12,8 @@ import miapd.ahp.objects.ComparisonMatrix;
 import miapd.ahp.objects.ComparisonObject;
 import miapd.ahp.objects.ComparisonPair;
 import miapd.ahp.utils.Loader;
+import miapd.ahp.utils.SingularValueError;
+
 import java.math.*;
 
 import java.io.IOException;
@@ -99,8 +101,15 @@ public class AHPApp extends Application {
         //add rest of results
         String ranking = "Ranking:\n";
         double[] res;
-        if (sessionOptions.getChosen("calculationMethod").equals("GMM"))
-            res = calculateRankingGM();
+        if (sessionOptions.getChosen("calculationMethod").equals("GMM")) {
+            try {
+                res = calculateRankingGM();
+            } catch (SingularValueError e) {
+                res = new double[1];
+                res[0] = -1;
+                e.printStackTrace();
+            }
+        }
         else
             res = calculateRankingEV();
         for (int i = 0; i < res.length; i++){
@@ -115,7 +124,11 @@ public class AHPApp extends Application {
             for (Map.Entry<String, ComparisonMatrix> comparisonResult : agents.get(i).getResultsEntrySet()){
                 CI += comparisonResult.getKey()+":\n";
                 CI += "\t- Saaty: "+String.format("%.3g",comparisonResult.getValue().calculateSaatysIC())+"\n";
-//                CI += "\t- Geometric Consinstency Index: "+String.format("%.3g",comparisonResult.getValue().calculateGCI())+"\n";
+                try {
+                    CI += "\t- Geometric Consinstency Index: "+String.format("%.3g",comparisonResult.getValue().calculateGCI())+"\n";
+                } catch (SingularValueError e) {
+                    e.printStackTrace();
+                }
             }
         }
         result.add(CI);
@@ -176,7 +189,7 @@ public class AHPApp extends Application {
         return aggregatedResults;
     }
 
-    public double[] calculateRankingGM(){
+    public double[] calculateRankingGM() throws SingularValueError {
         int objectsToCompSize = objectsToCompare.size();
         double[] aggregatedResults = new double[objectsToCompSize];
 

@@ -3,6 +3,7 @@ package miapd.ahp.objects;
 import Jama.Matrix;
 import Jama.EigenvalueDecomposition;
 import miapd.ahp.utils.PrintUtils;
+import miapd.ahp.utils.SingularValueError;
 
 import java.lang.*;
 
@@ -180,7 +181,7 @@ public class ComparisonMatrix {
         return constantsVector;
     }
 
-    public double[] calculateGM(){
+    public double[] calculateGM() throws SingularValueError {
         double[] vectorW = new double[this.size];
         if (checkIfComplete()){
             double[][] matrixB = this.comparisonMatrix;
@@ -204,6 +205,9 @@ public class ComparisonMatrix {
             System.out.println("MatrixB:\n"+PrintUtils.arr2DToString(this.getAuxiliaryMatrixGM()));
             Matrix matrixB = new Matrix(this.getAuxiliaryMatrixGM());
             System.out.println("MatrixB det = "+matrixB.det());
+            if(matrixB.det() == 0){
+                throw new SingularValueError(PrintUtils.arr2DToString(this.getAuxiliaryMatrixGM()));
+            }
             Matrix matrixLogC = new Matrix(this.getConstantsMatrixGM());
             Matrix matrixLogW = matrixB.solve(matrixLogC);
 
@@ -244,7 +248,7 @@ public class ComparisonMatrix {
         return (max - this.size)/(this.size - 1);
     }
 
-    public double calculateGCI(){
+    public double calculateGCI() throws SingularValueError {
         double[] vectorW = this.calculateGM();
 
         int counter = 0;
