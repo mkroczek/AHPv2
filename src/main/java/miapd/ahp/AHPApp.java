@@ -12,6 +12,8 @@ import miapd.ahp.objects.ComparisonMatrix;
 import miapd.ahp.objects.ComparisonObject;
 import miapd.ahp.objects.ComparisonPair;
 import miapd.ahp.utils.Loader;
+import miapd.ahp.utils.SingularValueError;
+
 import java.math.*;
 
 import java.io.IOException;
@@ -170,7 +172,7 @@ public class AHPApp extends Application {
         return aggregatedResults;
     }
 
-    public double[] calculateRankingGM(){
+    public double[] calculateRankingGM() throws SingularValueError {
         int objectsToCompSize = objectsToCompare.size();
         double[] aggregatedResults = new double[objectsToCompSize];
 
