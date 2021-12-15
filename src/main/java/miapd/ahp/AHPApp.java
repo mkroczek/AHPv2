@@ -98,22 +98,27 @@ public class AHPApp extends Application {
 
         //add rest of results
         String ranking = "Ranking:\n";
-        double[] res = calculateRankingEV();
+        double[] res;
+        if (sessionOptions.getChosen("calculationMethod").equals("GMM"))
+            res = calculateRankingGM();
+        else
+            res = calculateRankingEV();
         for (int i = 0; i < res.length; i++){
             ranking += objectsToCompare.get(i).getProperty("name")+" "+res[i]+"\n";
         }
         result.add(ranking);
 
-        //calculate inconsistency indices for each agent
-        String CI = "Consistency Indices:\n";
-        for (int i = 0; i < agents.size(); i++){
-            CI += "Agent "+i+": \n";
-            for (Map.Entry<String, ComparisonMatrix> comparisonResult : agents.get(i).getResultsEntrySet()){
-                CI += comparisonResult.getKey()+":\n";
-                CI += "\t- Saaty: "+comparisonResult.getValue().calculateSaatysIC()+"\n";
-            }
-        }
-        result.add(CI);
+//        //calculate inconsistency indices for each agent
+//        String CI = "Consistency Indices:\n";
+//        for (int i = 0; i < agents.size(); i++){
+//            CI += "Agent "+i+": \n";
+//            for (Map.Entry<String, ComparisonMatrix> comparisonResult : agents.get(i).getResultsEntrySet()){
+//                CI += comparisonResult.getKey()+":\n";
+//                CI += "\t- Saaty: "+comparisonResult.getValue().calculateSaatysIC()+"\n";
+//                CI += "\t- Geometric Consinstency Index: "+comparisonResult.getValue().calculateGCI()+"\n";
+//            }
+//        }
+//        result.add(CI);
         return result;
     }
 
@@ -158,8 +163,9 @@ public class AHPApp extends Application {
         double[] aggregatedResults = new double[objectsToCompare.size()];
 
         for(ComparisonAgent agent: agents){
+            double[] agentEV = agent.calculateSingleEVRanking();
             for(int i = 0; i<objectsToCompSize; i++){
-                aggregatedResults[i] = aggregatedResults[i] + agent.calculateSingleEVRanking()[i];
+                aggregatedResults[i] = aggregatedResults[i] + agentEV[i];
             }
         }
 
@@ -179,8 +185,9 @@ public class AHPApp extends Application {
         }
 
         for(ComparisonAgent agent: agents){
+            double[] agentGM = agent.calculateSingleGMRanking();
             for(int i = 0; i<objectsToCompSize; i++){
-                aggregatedResults[i] = aggregatedResults[i] + agent.calculateSingleGMRanking()[i];
+                aggregatedResults[i] = aggregatedResults[i] * agentGM[i];
             }
         }
 

@@ -48,14 +48,14 @@ public class ComparisonAgent {
 
     //uncomment for test
 
-//    public void updateRating(String category, ComparisonPair pair, double rate){
-//        //takes indices from current pair (id1, id2) and sets matrix[id1, id2] = rating for the given category
-//        int x = pair.getX();
-//        int y = pair.getY();
-//        ComparisonMatrix tmpMatrix = objectsComparison.get(category);
-//        tmpMatrix.setRating(x, y, rate);
-//        tmpMatrix.setRating(y, x, 1/rate);
-//    }
+    public void updateRating(String category, ComparisonPair pair, double rate){
+        //takes indices from current pair (id1, id2) and sets matrix[id1, id2] = rating for the given category
+        int x = pair.getX();
+        int y = pair.getY();
+        ComparisonMatrix tmpMatrix = objectsComparison.get(category);
+        tmpMatrix.setRating(x, y, rate);
+        tmpMatrix.setRating(y, x, 1/rate);
+    }
 
     public double getRating(String category, ComparisonPair pair){
         int x = pair.getX();
@@ -71,7 +71,6 @@ public class ComparisonAgent {
     public double[] calculateSingleEVRanking(){
         int vectorSize = this.comparisonObjects.size();
         double[] singleEVRanking = new double[vectorSize];
-        System.out.println("comparisonObjects.size = "+comparisonObjects.size());
 
         for (int i=0; i<vectorSize; i++){
             singleEVRanking[i] = 0;
@@ -87,7 +86,6 @@ public class ComparisonAgent {
             }
             categoryCounter = categoryCounter + 1;
         }
-        System.out.println("Calculated ranking in agent = "+ Arrays.toString(singleEVRanking));
         return singleEVRanking;
     }
 
