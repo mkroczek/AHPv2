@@ -3,6 +3,8 @@ package miapd.ahp.objects;
 import Jama.Matrix;
 import Jama.EigenvalueDecomposition;
 import java.lang.*;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 public class ComparisonMatrix {
     private final double[][] comparisonMatrix;
@@ -91,7 +93,6 @@ public class ComparisonMatrix {
                     }
                 }
             }
-            System.out.println(zerosCounter);
             auxiliaryMatrix[i][i] = zerosCounter + 1;
         }
 
@@ -107,21 +108,6 @@ public class ComparisonMatrix {
             matrix = new Matrix(this.getAuxiliaryMatrixEV());
         }
         EigenvalueDecomposition EVD = new EigenvalueDecomposition(matrix);
-
-        for(int i=0; i<this.size; i++){
-            for(int j=0; j<this.size; j++){
-                System.out.print(comparisonMatrix[i][j] + " ");
-            }
-            System.out.print("\n");
-        }
-
-        double[][] au = this.getAuxiliaryMatrixEV();
-        for(int i=0; i<this.size; i++){
-            for(int j=0; j<this.size; j++){
-                System.out.print(au[i][j] + " ");
-            }
-            System.out.print("\n");
-        }
 
         double[] eigenvaluesR = EVD.getRealEigenvalues();
         double[] eigenvaluesI = EVD.getImagEigenvalues();
@@ -147,6 +133,8 @@ public class ComparisonMatrix {
         for (int i=0; i<this.size; i++){
             eigenvector[i] = eigenvector[i] / sum;
         }
+
+        System.out.println(Arrays.toString(eigenvector));
 
         return eigenvector;
     }
@@ -237,6 +225,30 @@ public class ComparisonMatrix {
         }
 
         return (max - this.size)/(this.size - 1);
+    }
+
+    public double calculateGCI(){
+        double[] vectorW = this.calculateGM();
+
+        int counter = 0;
+        double consistencyIndex = 0.0;
+
+        for(int i = 0; i<this.size; i++){
+            for (int j = i+1; j<this.size; j++){
+                if(this.comparisonMatrix[i][j] != 0){
+                    counter = counter + 1;
+                    consistencyIndex = consistencyIndex +
+                            Math.pow(Math.log(this.comparisonMatrix[i][j]*vectorW[i]/vectorW[j]), 2);
+                }
+            }
+        }
+
+        //Z ksiązki
+        if(checkIfComplete()){
+            counter = counter * this.size/(this.size - 2);
+        }
+
+        return consistencyIndex/counter;
     }
 
 
