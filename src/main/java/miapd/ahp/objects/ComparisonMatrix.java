@@ -2,6 +2,8 @@ package miapd.ahp.objects;
 
 import Jama.Matrix;
 import Jama.EigenvalueDecomposition;
+import miapd.ahp.utils.PrintUtils;
+
 import java.lang.*;
 
 import java.util.Arrays;
@@ -199,7 +201,9 @@ public class ComparisonMatrix {
             }
         }
         else {
+            System.out.println("MatrixB:\n"+PrintUtils.arr2DToString(this.getAuxiliaryMatrixGM()));
             Matrix matrixB = new Matrix(this.getAuxiliaryMatrixGM());
+            System.out.println("MatrixB det = "+matrixB.det());
             Matrix matrixLogC = new Matrix(this.getConstantsMatrixGM());
             Matrix matrixLogW = matrixB.solve(matrixLogC);
 

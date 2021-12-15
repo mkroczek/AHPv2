@@ -104,21 +104,21 @@ public class AHPApp extends Application {
         else
             res = calculateRankingEV();
         for (int i = 0; i < res.length; i++){
-            ranking += objectsToCompare.get(i).getProperty("name")+" "+res[i]+"\n";
+            ranking += objectsToCompare.get(i).getProperty("name")+" "+String.format("%.3g",res[i])+"\n";
         }
         result.add(ranking);
 
-//        //calculate inconsistency indices for each agent
-//        String CI = "Consistency Indices:\n";
-//        for (int i = 0; i < agents.size(); i++){
-//            CI += "Agent "+i+": \n";
-//            for (Map.Entry<String, ComparisonMatrix> comparisonResult : agents.get(i).getResultsEntrySet()){
-//                CI += comparisonResult.getKey()+":\n";
-//                CI += "\t- Saaty: "+comparisonResult.getValue().calculateSaatysIC()+"\n";
-//                CI += "\t- Geometric Consinstency Index: "+comparisonResult.getValue().calculateGCI()+"\n";
-//            }
-//        }
-//        result.add(CI);
+        //calculate inconsistency indices for each agent
+        String CI = "Consistency Indices:\n";
+        for (int i = 0; i < agents.size(); i++){
+            CI += "Agent "+i+": \n";
+            for (Map.Entry<String, ComparisonMatrix> comparisonResult : agents.get(i).getResultsEntrySet()){
+                CI += comparisonResult.getKey()+":\n";
+                CI += "\t- Saaty: "+String.format("%.3g",comparisonResult.getValue().calculateSaatysIC())+"\n";
+//                CI += "\t- Geometric Consinstency Index: "+String.format("%.3g",comparisonResult.getValue().calculateGCI())+"\n";
+            }
+        }
+        result.add(CI);
         return result;
     }
 
