@@ -29,6 +29,11 @@ public class ComparisonMatrix {
         this.resetMatrix();
     }
 
+    public ComparisonMatrix(double[][] matrix){
+        this.comparisonMatrix = matrix;
+        this.size = matrix.length;
+    }
+
     private void resetMatrix(){
         for(int i=0; i<this.size; i++){
             for(int j=0; j<this.size; j++){
@@ -137,7 +142,7 @@ public class ComparisonMatrix {
             eigenvector[i] = eigenvector[i] / sum;
         }
 
-        System.out.println(Arrays.toString(eigenvector));
+//        System.out.println(Arrays.toString(eigenvector));
 
         return eigenvector;
     }
@@ -177,7 +182,7 @@ public class ComparisonMatrix {
                 }
             }
         }
-        System.out.println("r = "+Arrays.deepToString(constantsVector));
+//        System.out.println("r = "+Arrays.deepToString(constantsVector));
         return constantsVector;
     }
 
@@ -202,9 +207,9 @@ public class ComparisonMatrix {
             }
         }
         else {
-            System.out.println("MatrixB:\n"+PrintUtils.arr2DToString(this.getAuxiliaryMatrixGM()));
+//            System.out.println("MatrixB:\n"+PrintUtils.arr2DToString(this.getAuxiliaryMatrixGM()));
             Matrix matrixB = new Matrix(this.getAuxiliaryMatrixGM());
-            System.out.println("MatrixB det = "+matrixB.det());
+//            System.out.println("MatrixB det = "+matrixB.det());
             if(matrixB.det() == 0){
                 throw new SingularValueError(PrintUtils.arr2DToString(this.getAuxiliaryMatrixGM()));
             }

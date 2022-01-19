@@ -121,4 +121,9 @@ public class ComparisonAgent {
         return this.objectsComparison.get(name);
     }
 
+    public void setMatrix(String category, ComparisonMatrix matrix){
+        objectsComparison.put(category, matrix);
+    }
+
+
 }

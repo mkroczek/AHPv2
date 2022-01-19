@@ -47,7 +47,7 @@ public class AHPApp extends Application {
 
     private void loadData(){
         Loader loader = new Loader();
-        loader.loadJSON();
+        loader.loadJSON("projects.json");
         objectsToCompare = loader.createObjectList("objects", new String[]{"name"});
         categoriesToCompare = loader.createObjectList("categories", new String[]{"name"});
     }

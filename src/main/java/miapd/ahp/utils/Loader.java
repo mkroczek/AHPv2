@@ -14,15 +14,15 @@ public class Loader {
     private final JSONParser parser = new JSONParser();
     private JSONObject jsonObject = null;
 
-    public void loadJSON() {
+    public void loadJSON(String filename) {
         try {
             String localDir = System.getProperty("user.dir");
             Object obj;
             if(System.getProperty("file.separator").equals("/")){
-                obj = parser.parse(new FileReader(localDir + "/src/main/java/miapd/ahp/projects.json"));
+                obj = parser.parse(new FileReader(localDir + "/src/main/java/miapd/ahp/"+filename));
             }
             else {
-                obj = parser.parse(new FileReader(localDir + "\\src\\main\\java\\miapd\\ahp\\projects.json"));
+                obj = parser.parse(new FileReader(localDir + "\\src\\main\\java\\miapd\\ahp\\"+filename));
             }
             jsonObject = (JSONObject) obj;
         } catch (ParseException | IOException parseException) {
@@ -51,6 +51,10 @@ public class Loader {
         }
         assert jsonObject != null;
         return objectsList;
+    }
+
+    public JSONObject getJsonObject(){
+        return jsonObject;
     }
 
 }
