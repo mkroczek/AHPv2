@@ -7,17 +7,20 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
-<GridPane xmlns="http://javafx.com/javafx"
+<VBox xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="miapd.ahp.controllers.MoreExpertsController"
-          prefHeight="400.0" prefWidth="600.0" alignment="CENTER">
+          prefHeight="400.0" prefWidth="600.0" alignment="CENTER"
+          spacing="20">
 
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
+    <Label text="Czy chcesz wypełnić preferencje następnego eksperta?"/>
 
-    <Label GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" text="Czy chcesz wypełnić preferencje następnego eksperta?"/>
-    <Button GridPane.columnIndex="0" GridPane.rowIndex="1" text="Nie" onAction="#no"/>
-    <Button GridPane.columnIndex="1" GridPane.rowIndex="1" text="Tak" onAction="#yes"/>
+    <HBox alignment="CENTER" spacing="20">
+        <Button text="Nie" onAction="#no"/>
+        <Button text="Tak" onAction="#yes"/>
+    </HBox>
 
-</GridPane>
+</VBox>
