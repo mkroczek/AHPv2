@@ -13,15 +13,18 @@ public class ObjectDescription extends GridPane {
     private Label title = new Label();
     private TextArea description = new TextArea();
 
+    public ObjectDescription(){
+        RowConstraints constraints = new RowConstraints();
+        constraints.setVgrow(Priority.ALWAYS);
+        this.getRowConstraints().addAll(new RowConstraints(), constraints);
+    }
+
     public void fill(ComparisonObject object){
         getChildren().clear();
         title = new Label();
         description = new TextArea();
         description.setWrapText(true);
         description.setEditable(false);
-        RowConstraints constraints = new RowConstraints();
-        constraints.setVgrow(Priority.ALWAYS);
-        this.getRowConstraints().addAll(new RowConstraints(), constraints);
         title.setText(object.getProperty("name"));
         add(title, 0, 0);
 

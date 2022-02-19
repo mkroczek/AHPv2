@@ -25,9 +25,9 @@
         <rowConstraints>
             <RowConstraints vgrow="ALWAYS"/>
         </rowConstraints>
-        <ObjectDescription GridPane.columnIndex="0" GridPane.rowIndex="0" fx:id="firstObjectDescription"/>
+        <ObjectDescription GridPane.columnIndex="0" GridPane.rowIndex="0" fx:id="firstObjectDescription" style="-fx-background-color: blue"/>
 
-        <CategoriesWindow GridPane.columnIndex="1" GridPane.rowIndex="0" fx:id="compareWindow"/>
+        <CategoriesWindow GridPane.columnIndex="1" GridPane.rowIndex="0" fx:id="compareWindow" style="-fx-background-color: red"/>
 
         <ObjectDescription GridPane.columnIndex="2" GridPane.rowIndex="0" fx:id="secondObjectDescription"/>
 
