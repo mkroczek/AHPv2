@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -25,9 +22,9 @@
         <rowConstraints>
             <RowConstraints vgrow="ALWAYS"/>
         </rowConstraints>
-        <ObjectDescription GridPane.columnIndex="0" GridPane.rowIndex="0" fx:id="firstObjectDescription" style="-fx-background-color: blue"/>
+        <ObjectDescription GridPane.columnIndex="0" GridPane.rowIndex="0" fx:id="firstObjectDescription"/>
 
-        <CategoriesWindow GridPane.columnIndex="1" GridPane.rowIndex="0" fx:id="compareWindow" style="-fx-background-color: red"/>
+        <CategoriesWindow GridPane.columnIndex="1" GridPane.rowIndex="0" fx:id="compareWindow"/>
 
         <ObjectDescription GridPane.columnIndex="2" GridPane.rowIndex="0" fx:id="secondObjectDescription"/>
 
