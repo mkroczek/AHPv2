@@ -35,8 +35,8 @@ public class AHPApp extends Application {
             Pane root = fxmlLoader.load();
             IModelController<AHPApp> controller = fxmlLoader.getController();
             controller.setModel(this);
-//            Scene scene = new Scene(root, 1280, 720);
             Scene scene = new Scene(root);
+            scene.getStylesheets().add(String.valueOf(getClass().getResource("styling.css")));
             scenes.put(name, scene);
             return controller;
         } catch (IOException e) {
