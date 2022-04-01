@@ -12,19 +12,10 @@ import java.util.Arrays;
 public class ComparisonMatrix {
     private final double[][] comparisonMatrix;
     private final int size;
-    private String name = null;
 
     public ComparisonMatrix(int size){
         this.comparisonMatrix = new double[size][size];
         this.size = size;
-
-        this.resetMatrix();
-    }
-
-    public ComparisonMatrix(int size, String name){
-        this.comparisonMatrix = new double[size][size];
-        this.size = size;
-        this.name = name;
 
         this.resetMatrix();
     }
@@ -35,6 +26,7 @@ public class ComparisonMatrix {
     }
 
     private void resetMatrix(){
+        //sets default values in matrix
         for(int i=0; i<this.size; i++){
             for(int j=0; j<this.size; j++){
                 if (i == j) {
@@ -76,7 +68,7 @@ public class ComparisonMatrix {
         this.comparisonMatrix[x][y] = rating;
     }
 
-    private boolean checkIfComplete(){
+    public boolean checkIfComplete(){
         for(int i=0; i<this.size; i++){
             for(int j=0; j<this.size; j++){
                 if(comparisonMatrix[i][j] == 0){
@@ -87,7 +79,7 @@ public class ComparisonMatrix {
         return true;
     }
 
-    private double[][] getAuxiliaryMatrixEV(){
+    public double[][] getAuxiliaryMatrixEV(){
         double[][] auxiliaryMatrix = new double[this.size][this.size];
         for(int i=0; i<this.size; i++){
             int zerosCounter = 0;

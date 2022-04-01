@@ -1,3 +1,5 @@
+package java;
+
 import miapd.ahp.objects.ComparisonAgent;
 import miapd.ahp.objects.ComparisonObject;
 import miapd.ahp.objects.ComparisonPair;

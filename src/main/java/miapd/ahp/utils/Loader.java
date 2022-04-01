@@ -19,10 +19,10 @@ public class Loader {
             String localDir = System.getProperty("user.dir");
             Object obj;
             if(System.getProperty("file.separator").equals("/")){
-                obj = parser.parse(new FileReader(localDir + "/src/main/java/miapd/ahp/"+filename));
+                obj = parser.parse(new FileReader(localDir+"/"+filename));
             }
             else {
-                obj = parser.parse(new FileReader(localDir + "\\src\\main\\java\\miapd\\ahp\\"+filename));
+                obj = parser.parse(new FileReader(localDir+"/"+filename));
             }
             jsonObject = (JSONObject) obj;
         } catch (ParseException | IOException parseException) {

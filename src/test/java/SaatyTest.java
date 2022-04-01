@@ -1,3 +1,5 @@
+package java;
+
 import miapd.ahp.objects.ComparisonAgent;
 import miapd.ahp.objects.ComparisonObject;
 import miapd.ahp.objects.ComparisonPair;
@@ -7,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SaatyTest {
+
     @Test
     public void completeSaatyTest(){
         ArrayList<ComparisonObject> objects = new ArrayList<>();

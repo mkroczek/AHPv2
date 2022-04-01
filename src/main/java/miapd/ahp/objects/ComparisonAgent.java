@@ -37,6 +37,10 @@ public class ComparisonAgent {
         }
     }
 
+    public void loadRating(String category, ComparisonMatrix matrix){
+        objectsComparison.put(category, matrix);
+    }
+
     public void updateRating(String category, ComparisonPair pair, int rateId){
         //takes indices from current pair (id1, id2) and sets matrix[id1, id2] = rating for the given category
         double rating = AHPRates.getRate(rateId);
@@ -58,7 +62,7 @@ public class ComparisonAgent {
         tmpMatrix.setRating(y, x, 1/rate);
     }
 
-    public double getRating(String category, ComparisonPair pair){
+    public double getPairRating(String category, ComparisonPair pair){
         int x = pair.getX();
         int y = pair.getY();
         ComparisonMatrix tmpMatrix = objectsComparison.get(category);

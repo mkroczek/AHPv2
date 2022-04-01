@@ -6,15 +6,13 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import miapd.ahp.ahp.CalculationOptions;
+import miapd.ahp.ahp.ConsistencyIndices;
 import miapd.ahp.controllers.IModelController;
 import miapd.ahp.objects.ComparisonAgent;
 import miapd.ahp.objects.ComparisonMatrix;
 import miapd.ahp.objects.ComparisonObject;
-import miapd.ahp.objects.ComparisonPair;
 import miapd.ahp.utils.Loader;
 import miapd.ahp.utils.SingularValueError;
-
-import java.math.*;
 
 import java.io.IOException;
 import java.util.*;
@@ -47,7 +45,7 @@ public class AHPApp extends Application {
 
     private void loadData(){
         Loader loader = new Loader();
-        loader.loadJSON("projects.json");
+        loader.loadJSON("src/main/resources/model/projects.json");
         objectsToCompare = loader.createObjectList("objects", new String[]{"name"});
         categoriesToCompare = loader.createObjectList("categories", new String[]{"name"});
     }
@@ -72,7 +70,7 @@ public class AHPApp extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         this.stage = stage;
         loadData();
         initializeOptions();
@@ -123,9 +121,9 @@ public class AHPApp extends Application {
             CI += "Agent "+i+": \n";
             for (Map.Entry<String, ComparisonMatrix> comparisonResult : agents.get(i).getResultsEntrySet()){
                 CI += comparisonResult.getKey()+":\n";
-                CI += "\t- Saaty: "+String.format("%.3g",comparisonResult.getValue().calculateSaatysIC())+"\n";
+                CI += "\t- Saaty: "+String.format("%.3g", ConsistencyIndices.calculateSaatysIC(comparisonResult.getValue()))+"\n";
                 try {
-                    CI += "\t- Geometric Consinstency Index: "+String.format("%.3g",comparisonResult.getValue().calculateGCI())+"\n";
+                    CI += "\t- Geometric Consinstency Index: "+String.format("%.3g",ConsistencyIndices.calculateGCI(comparisonResult.getValue()))+"\n";
                 } catch (SingularValueError e) {
                     e.printStackTrace();
                 }
@@ -171,9 +169,8 @@ public class AHPApp extends Application {
 
     public double[] calculateRankingEV(){
         int objectsToCompSize = objectsToCompare.size();
-        System.out.println("Categories to compare size = "+objectsToCompSize);
-        System.out.println("Agents size = "+agents.size());
-        double[] aggregatedResults = new double[objectsToCompare.size()];
+
+        double[] aggregatedResults = new double[objectsToCompSize];
 
         for(ComparisonAgent agent: agents){
             double[] agentEV = agent.calculateSingleEVRanking();

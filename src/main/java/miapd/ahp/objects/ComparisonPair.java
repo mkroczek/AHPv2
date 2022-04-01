@@ -7,14 +7,14 @@ public class ComparisonPair {
     private int y;
     private ComparisonObject firstObject;
     private ComparisonObject secondObject;
-    private ArrayList<String> matrices;
+    private ArrayList<String> categories;
 
     public ComparisonPair(int x, int y, ComparisonObject firstObject, ComparisonObject secondObject, ArrayList<String> toCompare){
         this.x = x;
         this.y = y;
         this.firstObject = firstObject;
         this.secondObject = secondObject;
-        this.matrices = toCompare;
+        this.categories = toCompare;
     }
 
     public int getX(){
@@ -34,6 +34,6 @@ public class ComparisonPair {
     }
 
     public ArrayList<String> getCategories(){
-        return this.matrices;
+        return this.categories;
     }
 }

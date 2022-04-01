@@ -78,7 +78,7 @@ public class ExpertController implements IModelController<AHPApp>{
         firstObjectDescription.fill(pair.getFirstObject());
         secondObjectDescription.fill(pair.getSecondObject());
         for (String category : pair.getCategories()){
-            double rating = agent.getRating(category, pair);
+            double rating = agent.getPairRating(category, pair);
             if (rating != 0){
                 compareWindow.fill(category, AHPRates.getId(rating));
             }
